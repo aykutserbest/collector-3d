@@ -1,15 +1,28 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
-public class CollectableController : MonoBehaviour
+namespace _GameCore.Scripts
 {
-    private float staticYPosition = -0.13f;
-    void Update()
+    public class CollectableController : MonoBehaviour
     {
-        if (gameObject.transform.position.y > staticYPosition)
+        #region Variables
+        
+        private float staticYPosition = 5f;
+
+        private Rigidbody _rigidbody;
+        
+        #endregion
+        
+        private void Awake()
         {
-            gameObject.transform.position = new Vector3(transform.position.x, staticYPosition, transform.position.z);
+            _rigidbody = GetComponent<Rigidbody>();
+        }
+
+        void Update()
+        {
+            if (gameObject.transform.position.y > staticYPosition)
+            {
+                _rigidbody.MovePosition(new Vector3(transform.position.x, staticYPosition, transform.position.z));
+            }
         }
     }
 }
