@@ -14,3 +14,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   levelNumber: 1
   levelMesh: {fileID: 3087790326295893903, guid: abf988c08d1e7c048b001882e0741ea9, type: 3}
+  holeCount: 1
