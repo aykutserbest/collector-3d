@@ -6,7 +6,7 @@ namespace _GameCore.Scripts
     public class CharacterMovementController : MonoBehaviour
     {
         #region Variable
-        [SerializeField] private float speed;
+        public float speed;
         [SerializeField] private float clampxMin = -2.7f;
         [SerializeField] private float clampxMax = 0.7f;
 

@@ -10,5 +10,7 @@ public class Level : ScriptableObject
 {
    public int levelNumber;
    public GameObject levelMesh;
+   public int holeCount;
    
+
 }
