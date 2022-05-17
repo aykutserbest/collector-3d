@@ -5,9 +5,10 @@ namespace _GameCore.Scripts
 {
     public class HoleTriggerController : MonoBehaviour
     {
+        [SerializeField] private int holeID;
         private void OnTriggerEnter(Collider other)
         {
-            EventManager.OnHoleTriggerEnter?.Invoke();
+            EventManager.OnHoleTriggerEnter?.Invoke(holeID);
         }
     }
 }

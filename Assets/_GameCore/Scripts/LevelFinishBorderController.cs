@@ -1,15 +1,15 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
-public class LevelFinishBorderController : MonoBehaviour
+namespace _GameCore.Scripts
 {
-    private void OnTriggerEnter(Collider other)
+    public class LevelFinishBorderController : MonoBehaviour
     {
-        if (other.CompareTag("Player"))
+        private void OnTriggerEnter(Collider other)
         {
-            EventManager.OnFinishTriggerEnter?.Invoke();
+            if (other.CompareTag("Player"))
+            {
+                EventManager.OnFinishTriggerEnter?.Invoke();
+            }
         }
     }
 }

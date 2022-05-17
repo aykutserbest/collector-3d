@@ -1,31 +1,51 @@
-using System.Collections;
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class GameManager : MonoBehaviour
+namespace _GameCore.Scripts
 {
-    public static GameManager Instance { get; private set; }
-
-    [SerializeField] private List<Level> levelSOList;
-
-    public List<Level> _levelSOList
+    public class GameManager : MonoBehaviour
     {
-        get { return levelSOList;}
-        set {  }
-    }
-    
-    void Awake()
-    {
-        if (Instance == null)
+        public static GameManager Instance { get; private set; }
+
+        [SerializeField] private List<Level> levelSOList;
+
+        public List<Level> _levelSOList
         {
-            Instance = this;             
+            get { return levelSOList;}
+            set {  }
         }
-        else if (Instance != this)
+
+        private void Start()
         {
-            Destroy(this);
+            DataManager.Instance.LoadLevel();
+            StartLevelProgress();
         }
+
+        void Awake()
+        {
+            if (Instance == null)
+            {
+                Instance = this;             
+            }
+            else if (Instance != this)
+            {
+                Destroy(this);
+            }
+        }
+
+        private void StartLevelProgress()
+        {
+            LevelManager.Instance.StartLevel();
+        }
+        
+        public int GetLevelTargetHole(int levelID)
+        {
+            return levelSOList[levelID].holeCount;
+        }
+        
+    
+    
+    
     }
-    
-    
-    
 }

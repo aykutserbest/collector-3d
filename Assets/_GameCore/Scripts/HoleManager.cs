@@ -1,41 +1,50 @@
-using System.Collections;
-using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 
-public class HoleManager : MonoBehaviour
+namespace _GameCore.Scripts
 {
-    [SerializeField] private int holeID;
-    [SerializeField] private int targetCollectCount;
-    private int _currentCollectCount;
-
-    [SerializeField] private TextMeshPro targetCollectCountTxt;
-    [SerializeField] private TextMeshPro currentCollectCountTxt;
-
-    void OnEnable()
+    public class HoleManager : MonoBehaviour
     {
-        targetCollectCountTxt.text = targetCollectCount.ToString();
-        SubscribeHoleTriggerEvent();
-    }
-    
-    void SubscribeHoleTriggerEvent()
-    {
-        EventManager.OnHoleTriggerEnter += CollectCounter;
-    }
+        [SerializeField] private int holeID;
+        [SerializeField] private int targetCollectCount;
+        private int _currentCollectCount;
+        private bool _isCompletedHole;
 
-    private void OnDisable()
-    {
-        EventManager.OnHoleTriggerEnter -= CollectCounter;
-    }
+        [SerializeField] private TextMeshPro targetCollectCountTxt;
+        [SerializeField] private TextMeshPro currentCollectCountTxt;
 
-    private void CollectCounter()
-    {
-        _currentCollectCount++;
-        currentCollectCountTxt.text = _currentCollectCount.ToString();
-
-        if (_currentCollectCount >= targetCollectCount)
+        void OnEnable()
         {
-            EventManager.OnCompletedHoleTargetCount?.Invoke();
+            _isCompletedHole = true;
+            targetCollectCountTxt.text = targetCollectCount.ToString();
+            SubscribeHoleTriggerEvent();
+        }
+    
+        void SubscribeHoleTriggerEvent()
+        {
+            EventManager.OnHoleTriggerEnter += CollectCounter;
+        }
+
+        private void OnDisable()
+        {
+            EventManager.OnHoleTriggerEnter -= CollectCounter;
+        }
+
+        private void CollectCounter(int currentHoleID)
+        {
+            if (holeID==currentHoleID)
+            {
+                _currentCollectCount++;
+                currentCollectCountTxt.text = _currentCollectCount.ToString();
+                
+                if (_currentCollectCount == targetCollectCount && _isCompletedHole)
+                {
+                    _isCompletedHole = false;
+                    EventManager.OnCompletedHoleTargetCount?.Invoke();
+                }
+            }
+
+            
         }
         
     }
