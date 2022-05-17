@@ -9,9 +9,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9c1ac9237f72766439a1dc411d1c8abb, type: 3}
-  m_Name: Level3
+  m_Script: {fileID: 11500000, guid: 8d071e59bad7d4d4cbee0bd30fd3682f, type: 3}
+  m_Name: Data
   m_EditorClassIdentifier: 
-  levelNumber: 3
-  levelMesh: {fileID: 1870463523631677406, guid: 61d31efb751c26847b5c16c82479fdda, type: 3}
-  holeCount: 3
+  currentLevelNumber: 3
+  diamondNumber: 999
+  isSoundSettings: 0
